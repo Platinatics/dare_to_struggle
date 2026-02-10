@@ -43,13 +43,13 @@ for (let state of Q.states) {
     let nsdapMod = Q[cls + "_nsdap"] || 0;
     let otherMod = Q[cls + "_other"] || 0;
 
-    let adjPcc = 0.2 * lpc + 0.8 * PccMod;
+    let adjPcc = 0.2 * lpc + 0.8 * pccMod;
     let adjCcf = 0.2 * ccf + 0.8 * ccfMod;
-    let adjLpc = 0.2 * lpc + 0.8 * LpcMod;
-    let adjCpc = 0.2 * lpc + 0.8 * CpcMod;
-    let adjRpc = 0.2 * lpc + 0.8 * RpcMod;
-    let adjScp = 0.2 * lpc + 0.8 * ScpMod;
-    let adjNsdap = 0.2 * lpc + 0.8 * NsdapMod;
+    let adjLpc = 0.2 * lpc + 0.8 * lpcMod;
+    let adjCpc = 0.2 * lpc + 0.8 * cpcMod;
+    let adjRpc = 0.2 * lpc + 0.8 * rpcMod;
+    let adjScp = 0.2 * lpc + 0.8 * scpMod;
+    let adjNsdap = 0.2 * lpc + 0.8 * nsdapMod;
     let adjOther = 0.2 * other + 0.8 * otherMod;
 
     let totalPct = adjPcc + adjCcf + adjLpc + adjRpc + adjCpc + adjScp + adjNsdap + adjOther + ;
@@ -58,10 +58,10 @@ for (let state of Q.states) {
     pccVotes += pop * (adjPcc / totalPct);
     ccfVotes += pop * (adjCcf / totalPct);
     lpcVotes += pop * (adjLpc / totalPct);
-    RpcVotes += pop * (adjRpc / totalPct);
-    CpcVotes += pop * (adjCpc / totalPct);
-    ScpVotes += pop * (adjScp / totalPct);
-    NsdapVotes += pop * (adjNsdap / totalPct);
+    rpcVotes += pop * (adjRpc / totalPct);
+    cpcVotes += pop * (adjCpc / totalPct);
+    scpVotes += pop * (adjScp / totalPct);
+    nsdapVotes += pop * (adjNsdap / totalPct);
     otherVotes += pop * (adjOther / totalPct);
   }
 }
