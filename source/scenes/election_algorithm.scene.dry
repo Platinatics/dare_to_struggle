@@ -68,7 +68,7 @@ for (let state of Q.states) {
 
 // Allocate projected seats
 let totalVotes = pccVotes + ccfVotes + lpcVotes + rpcVotes + cpcVotes + scpVotes + nsdapVotes + otherVotes ;
-let totalSeats = Q.total_house_seats || 245;
+let totalSeats = Q.total_commons_seats || 245;
 
 let pccShare = pccVotes / totalVotes;
 let ccfShare = ccfVotes / totalVotes;

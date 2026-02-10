@@ -1,4 +1,4 @@
-title: House Elections
+title: Commons Elections
 new-page: true
 tags: event
 view-if: (year = next_election_year and month >= next_election_month) or (year > next_election_year)
@@ -144,19 +144,19 @@ let result = { date: Q.year + "-" + Q.month };
 for (let party of Q.parties) {
     result[party] = Q[party + "_r"];
 }
-Q.house_election_records = Q.house_election_records || [];
-Q.house_election_records.push(result);
+Q.commons_election_records = Q.commons_election_records || [];
+Q.commons_election_records.push(result);
 
 // === 8. Majority strength ===
-let totalHouse = Q.total_house_seats || (Q.ccf_r + Q.lpc_r + Q.other_r);
-let ccfPctHouse = (Q.ccf_r / totalHouse) * 100;
+let totalCommons = Q.total_commons_seats || (Q.ccf_r + Q.lpc_r + Q.other_r);
+let ccfPctCommons = (Q.ccf_r / totalCommons) * 100;
 
-if (ccfPctHouse >= 66.7) {
-    Q.house_majority = 3;
-} else if (ccfPctHouse >= 50) {
-    Q.house_majority = 2;
+if (ccfPctCommons >= 66.7) {
+    Q.commons_majority = 3;
+} else if (ccfPctCommons >= 50) {
+    Q.commons_majority = 2;
 } else {
-    Q.house_majority = 0;
+    Q.commons_majority = 0;
 }
 
 !}
@@ -215,9 +215,9 @@ on-display: {!
 
     var width = Math.min(500, document.getElementById('content').offsetWidth - 50);
 
-    var container = d3.select("#houseChart");
+    var container = d3.select("#commonsChart");
     if (container.empty()) {
-      container = d3.select("#content").append("svg").attr("id", "houseChart");
+      container = d3.select("#content").append("svg").attr("id", "commonsChart");
     }
     container.attr("width", width)
              .attr("height", width / 2)
@@ -248,9 +248,9 @@ on-display: {!
 !}
 go-to: ministries
 
-= House Election Results
+= Commons Election Results
 
-{!<svg id="houseChart" style="width: 500px; height: 250px;"> </svg>!}
+{!<svg id="commonsChart" style="width: 500px; height: 250px;"> </svg>!}
 
 {!<table>!} 
 {!<tr><td>Party</td><td>Seats</td><td>Change</td></tr>!}
@@ -305,11 +305,11 @@ go-to: ministries
 
 **Potential coalitions:**
 
-Weimar Coalition (CCF + RPC + [+ lpc_name +]): [+ weimar_coalition +]%
+Weimar Coalition (CCF + RPC + LPC): [+ weimar_coalition +]%
 
-Grand Coalition (CCF + RPC + BVP + [+ lpc_name +] + CPC): [+ grand_coalition +]%
+Grand Coalition (CCF + RPC + BVP + LPC + CPC): [+ grand_coalition +]%
 
-Bourgeois Coalition (RPC + BVP + [+ lpc_name +] + CPC + Others): [+ bourgeois_coalition +]%
+Bourgeois Coalition (RPC + BVP + LPC + CPC + Others): [+ bourgeois_coalition +]%
 
 Right-wing Coalition (RPC + BVP + CPC + Others + SCP): [+ right_coalition +]%
 
@@ -338,8 +338,8 @@ There are some potential coalition arrangements.
 
 @popular_front_coalition
 title: A new "Popular Front" coalition?
-subtitle: CCF + PCC + RPC + [+ lpc_name +]  [? if sapd_formed: + SAPD ?]([+ popular_front_coalition +]%)
-unavailable-subtitle: CCF + PCC + RPC + [+ lpc_name +] [? if sapd_formed: + SAPD ?]([+ popular_front_coalition +]%) - [? if ((pcc_relation < 65 and pcc_party_leader == "Thälmann") or (pcc_relation < 45 and pcc_party_leader == "Conciliators")): We do not have good enough relations with the PCC. ?][? if (rpc_relation < 45 and rpc_party_leader == "Joos") or (rpc_relation < 65 and rpc_party_leader != "Joos" and pcc_party_leader != "Conciliators") or (rpc_relation < 55 and rpc_party_leader != "Joos" and pcc_party_leader == "Conciliators"): We do not have good enough relations with the Center Party. ?][? if communist_coalition < 3 : The Communists are unwilling to compromise at all. ?]
+subtitle: CCF + PCC + RPC + LPC  [? if sapd_formed: + SAPD ?]([+ popular_front_coalition +]%)
+unavailable-subtitle: CCF + PCC + RPC + LPC [? if sapd_formed: + SAPD ?]([+ popular_front_coalition +]%) - [? if ((pcc_relation < 65 and pcc_party_leader == "Thälmann") or (pcc_relation < 45 and pcc_party_leader == "Conciliators")): We do not have good enough relations with the PCC. ?][? if (rpc_relation < 45 and rpc_party_leader == "Joos") or (rpc_relation < 65 and rpc_party_leader != "Joos" and pcc_party_leader != "Conciliators") or (rpc_relation < 55 and rpc_party_leader != "Joos" and pcc_party_leader == "Conciliators"): We do not have good enough relations with the Center Party. ?][? if communist_coalition < 3 : The Communists are unwilling to compromise at all. ?]
 view-if: popular_front_coalition >= 50
 choose-if: (((pcc_relation >= 65 and pcc_party_leader == "Thälmann") or (pcc_relation >= 45 and pcc_party_leader == "Conciliators")) and ((rpc_relation >= 45 and rpc_party_leader == "Joos") or (rpc_relation >= 65 and rpc_party_leader != "Joos" and pcc_party_leader != "Conciliators") or (rpc_relation >= 55 and rpc_party_leader != "Joos" and pcc_party_leader == "Conciliators")) and lpc_relation >= 50 and communist_coalition >= 3) or (rpc_party_leader == "Joos" and pcc_party_leader == "Conciliators" and rpc_relation >= 30 and pcc_relation >= 30)
 
@@ -624,10 +624,10 @@ The third option is to have new elections.
 
 @new_grand_coalition
 title: A "New Grand Coalition" of all the constitutional parties?
-subtitle: CCF + RPC + BVP + [+ lpc_name +] + CPC + Others ([+ neo_weimar_coalition +]%)
+subtitle: CCF + RPC + BVP + LPC + CPC + Others ([+ neo_weimar_coalition +]%)
 view-if: neo_weimar_coalition >= 50 and grand_coalition < 50
 choose-if: rpc_relation >= 50 and cpc_relation >= 30
-unavailable-subtitle: CCF + RPC + BVP + [+ lpc_name +] + CPC + Others ([+ neo_weimar_coalition +]%) - [? if rpc_relation < 50 : We do not have adequate relations with the Center Party. ?][? if cpc_relation < 30 : We do not have adequate relations with the CPC. ?]
+unavailable-subtitle: CCF + RPC + BVP + LPC + CPC + Others ([+ neo_weimar_coalition +]%) - [? if rpc_relation < 50 : We do not have adequate relations with the Center Party. ?][? if cpc_relation < 30 : We do not have adequate relations with the CPC. ?]
 
 How do we convince vehemently anti-socialist parties to allow us to form a majority coalition? Our largely benevolent relations with the Center and CPC may allow us some leverage.
 
@@ -665,7 +665,7 @@ We have assembled a new coalition under J.S. Woodsworth.
 
 @unity_government
 title: The Center Party offers a "Government of National Unity" under Chancellor Joseph Wirth.
-subtitle: CCF + RPC + BVP + [+ lpc_name +] + CPC + Others ([+ neo_weimar_coalition +]%)
+subtitle: CCF + RPC + BVP + LPC + CPC + Others ([+ neo_weimar_coalition +]%)
 view-if: rpc_party_leader == "Joos" and neo_weimar_coalition >= 50 and weimar_coalition < 50 and rpc_relation >= 10
 
 The Center Party leader, Joseph Joos, clearly sees the threat from the ascension of the anti-democratic extremist parties, and thus tries to negotiate a "Government of National Unity" to save the republic. This coalition would be led by Joseph Wirth, a left-leaning member of the Center Party and former chancellor, and would encompass all of the constitutional parties. Our role in this government might be limited, however.
@@ -927,12 +927,12 @@ We have won the vote of no confidence, and are currently ruling under an CCF min
 
 @weimar_coalition
 title: We can form a Weimar Coalition.
-subtitle: CCF + RPC + [+ lpc_name +] [? if sapd_formed and pcc_relation >= 30 : + SAPD toleration ?] ([+ weimar_coalition +]%)
+subtitle: CCF + RPC + LPC [? if sapd_formed and pcc_relation >= 30 : + SAPD toleration ?] ([+ weimar_coalition +]%)
 view-if: weimar_coalition >= 50
 on-arrival: leverage += 5; leverage += 5 if rpc_party_leader == "Joos"; in_weimar_coalition = 1; ccf_in_government = 1; in_popular_front = 0; in_left_front = 0; foreign_minister_party = "RPC"; interior_minister_party = "RPC"; justice_minister_party = lpc_name; labor_minister_party = "RPC"; reichswehr_minister_party = "I"; economic_minister_party = lpc_name; finance_minister_party = "RPC"; agriculture_minister_party = "RPC"; foreign_minister = "Wirth"; interior_minister = "Wirth"; justice_minister = "Koch-Weser"; labor_minister = "Stegerwald"; reichswehr_minister = "Groener"; economic_minister = "Dietrich"; finance_minister = "Köhler"; agriculture_minister = "Hermes";
 achievement: weimar_coalition
 
-We have enough votes to form a "Weimar Coalition" government consisting of the CCF, Center (RPC) and Democratic ([+ lpc_name +]) parties! This has been our preferred governing coalition since 1919.
+We have enough votes to form a "Weimar Coalition" government consisting of the CCF, Center (RPC) and Democratic (LPC) parties! This has been our preferred governing coalition since 1919.
 
 Who should be the chancellor?
 
@@ -956,7 +956,7 @@ Robert Gardiner has been appointed chancellor.
 @grand_coalition
 title: We can form a Grand Coalition.
 view-if: grand_coalition >= 50 and grand_coalition_failed == 0
-subtitle: CCF + RPC + BVP + [+ lpc_name +] + CPC ([+ grand_coalition +]%)
+subtitle: CCF + RPC + BVP + LPC + CPC ([+ grand_coalition +]%)
 on-arrival: in_grand_coalition = 1; in_popular_front = 0; in_left_front = 0
 go-to: grand_coalition_ccf_lead if (n_elections <= 1 and largest_party == "CCF") or (largest_party == "CCF" and ccf_r >= 30) or king = "Woodsworth"; grand_coalition_rpc_lead if king != "Woodsworth" and ((n_elections > 1 and ccf_r < 30) or (n_elections <= 1 and largest_party != "CCF"))
 
@@ -966,7 +966,7 @@ go-to: grand_coalition_ccf_lead if (n_elections <= 1 and largest_party == "CCF")
 @grand_coalition_rpc_lead
 go-to: grand_coalition_rpc_lead_2 if cpc_relation >= 30; grand_coalition_fail if cpc_relation < 30
 
-There are enough votes to form a majority coalition consisting of the CCF, Center (RPC), Bavarian People's (BVP), Democratic ([+ lpc_name +]), and People's (CPC) parties. Given our rather weak electoral performance, [? if ccf_no_confidence = 1 : and our previous vote of no confidence against the government, ?][? if no_confidence_against_ccf = 1 : and the vote of no confidence against us, ?] King George V has asked the Center Party to take the lead role in forming a government.
+There are enough votes to form a majority coalition consisting of the CCF, Center (RPC), Bavarian People's (BVP), Democratic (LPC), and People's (CPC) parties. Given our rather weak electoral performance, [? if ccf_no_confidence = 1 : and our previous vote of no confidence against the government, ?][? if no_confidence_against_ccf = 1 : and the vote of no confidence against us, ?] King George V has asked the Center Party to take the lead role in forming a government.
 
 # TODO: if the CCF participated in bringing down the previous government via a vote-of-no-confidence, or if we were essentially removed from government by our coalition partners, we should be more reluctant to participate in a new government.
 
@@ -1124,7 +1124,7 @@ As expected, the CPC is too set in their anti-democratic ways.
 @grand_coalition_ccf_lead
 on-arrival: leverage -= 15 if cpc_relation < 20
 
-As expected, the CCF is the largest party, and this time, we are expected to take the lead role in the formation of the next government, including selecting the chancellor. King [+ king +] has asked us to form a majority coalition with the Center (RPC), Bavarian People's (BVP), Democratic ([+ lpc_name +]), and People's (CPC) parties.
+As expected, the CCF is the largest party, and this time, we are expected to take the lead role in the formation of the next government, including selecting the chancellor. King [+ king +] has asked us to form a majority coalition with the Center (RPC), Bavarian People's (BVP), Democratic (LPC), and People's (CPC) parties.
 
 [? if cpc_relation < 20 : As our relation with the CPC is poor, they are demanding more minister posts in order to remain part of the coalition. ?]
 
@@ -1359,56 +1359,56 @@ This coalition arrangement is tolerable to all.
 
 @drop_labor
 title: Drop the Labor Ministry.
-view-if: labor_minister_party = "CCF"
+view-if: labor_minister_party = "CPC"
 on-arrival: labor_minister_party = "RPC"; labor_minister = "Stegerwald"; leverage += 5;
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_interior
 title: Drop the Interior Ministry.
-view-if: interior_minister_party = "CCF"
-on-arrival: interior_minister_party = "RPC"; interior_minister = "Wirth"; leverage += 5;
+view-if: interior_minister_party = "CPC"
+on-arrival: interior_minister_party = "CPC"; interior_minister = "Wirth"; leverage += 5;
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_finance
 title: Drop the Finance Ministry.
-view-if: finance_minister_party = "CCF"
+view-if: finance_minister_party = "CPC"
 on-arrival: finance_minister_party = "CPC"; finance_minister = "Moldenhauer"; leverage += 10; finance_minister_party = "RPC" if in_weimar_coalition or in_popular_front; finance_minister = "Köhler" if in_weimar_coalition or in_popular_front
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_economic
 title: Drop the Economic Ministry.
-view-if: economic_minister_party = "CCF"
+view-if: economic_minister_party = "CPC"
 on-arrival: economic_minister_party = "CPC"; economic_minister = "Curtius"; leverage += 10; economic_minister_party = lpc_name if in_weimar_coalition or in_popular_front; economic_minister = "Dietrich" if in_weimar_coalition or in_popular_front;
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_justice
 title: Drop the Justice Ministry.
-view-if: justice_minister_party = "CCF"
-on-arrival: justice_minister_party = lpc_name; justice_minister = "Koch-Weser"; leverage += 10;
+view-if: justice_minister_party = "CPC"
+on-arrival: justice_minister_party = "CPC"; justice_minister = "Koch-Weser"; leverage += 10;
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_foreign
 title: Drop the Foreign Ministry.
-view-if: foreign_minister_party = "CCF"
+view-if: foreign_minister_party = "CPC"
 on-arrival: foreign_minister_party = "CPC"; foreign_minister = "Stresemann"; foreign_minister = "Curtius" if streseman_dead; leverage += 10; foreign_minister_party = "RPC" if in_weimar_coalition or in_popular_front; foreign_minister = "Wirth" if in_weimar_coalition or in_popular_front;
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_agriculture
 title: Drop the Agriculture Ministry.
-view-if: agriculture_minister_party = "CCF"
-on-arrival: agriculture_minister_party = lpc_name; agriculture_minister = "Dietrich"; leverage += 10; agriculture_minister_party = "RPC" if in_weimar_coalition; agriculture_minister = "Hermes" if in_weimar_coalition
+view-if: agriculture_minister_party = "CPC"
+on-arrival: agriculture_minister_party = "CPC"; agriculture_minister = "Dietrich"; leverage += 10; agriculture_minister_party = "RPC" if in_weimar_coalition; agriculture_minister = "Hermes" if in_weimar_coalition
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_reichswehr
 title: Drop the Reichswehr Ministry.
-view-if: reichswehr_minister_party = "CCF"
-on-arrival: reichswehr_minister_party = "I"; reichswehr_minister = "Groener"; leverage += 15;
+view-if: reichswehr_minister_party = "CPC"
+on-arrival: reichswehr_minister_party = "CPC"; reichswehr_minister = "Groener"; leverage += 15;
 tags: drop_mins_1928
 go-to: ministries
