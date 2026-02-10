@@ -246,7 +246,7 @@ on-display: {!
     drawChart();
   }
 !}
-go-to: house_menu
+go-to: ministries
 
 = House Election Results
 
