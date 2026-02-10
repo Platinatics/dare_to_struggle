@@ -246,14 +246,14 @@ set-jump: post_election
 @post_election
 on-arrival: {!
 // set congress proportion to votes
-Q.ccf_r = Q.ccf_votes;
-Q.rpc_r = Q.rpc_votes;
-Q.pcc_r = Q.pcc_votes;
-Q.lpc_r = Q.lpc_votes;
-Q.cpc_r = Q.cpc_votes;
-Q.scp_r = Q.scp_votes;
-Q.nsdap_r = Q.nsdap_votes;
-Q.other_r = Q.other_votes;
+Q.ccf_r = Q.ccf_r;
+Q.rpc_r = Q.rpc_r;
+Q.pcc_r = Q.pcc_r;
+Q.lpc_r = Q.lpc_r;
+Q.cpc_r = Q.cpc_r;
+Q.scp_r = Q.scp_r;
+Q.nsdap_r = Q.nsdap_r;
+Q.other_r = Q.other_r;
 
 // The largest party can only be the NSDAP or the CCF.
 Q.largest_party = 'CCF';

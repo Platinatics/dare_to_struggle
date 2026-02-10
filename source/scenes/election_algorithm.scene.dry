@@ -1,57 +1,95 @@
 title: Election
 on-arrival: {!
-// calculate normalized class voting amounts (0 to 100)
-for (var c of Q.classes) {
-    var class_votes = 0;
-    for (var party of Q.parties) {
-        if (Q[c+'_'+party] < 0) {
-            Q[c+'_'+party] = 0;
-        }
-        class_votes += Q[c+'_'+party];
-    }
-    for (var party of Q.parties) {
-        Q[c + '_' + party + '_normalized'] = 100*Q[c+'_'+party]/class_votes;
-        Q[c + '_' + party + '_display'] = Math.round(100*Q[c+'_'+party]/class_votes);
-    }
+
+Q.pcc_r_pro = 0;
+Q.ccf_r_pro = 0;
+Q.lpc_r_pro = 0;
+Q.rpc_r_pro = 0;
+Q.cpc_r_pro = 0;
+Q.scp_r_pro = 0;
+Q.nsdap_r_pro = 0;
+Q.other_r_pro = 0;
+
+let pccVotes = 0;
+let ccfVotes = 0;
+let lpcVotes = 0;
+let rpcVotes = 0;
+let cpcVotes = 0;
+let scpVotes = 0;
+let nsdapVotes = 0;
+let otherVotes = 0;
+
+for (let state of Q.states) {
+  for (let cls of Q.classes) {
+    let pop = Q[state + "_" + cls] || 0;
+
+    // Local support
+    let pcc = Q[state + "_" + cls + "_pcc"] || 0;
+    let ccf = Q[state + "_" + cls + "_ccf"] || 0;
+    let lpc = Q[state + "_" + cls + "_lpc"] || 0;
+    let rpc = Q[state + "_" + cls + "_rpc"] || 0;
+    let cpc = Q[state + "_" + cls + "_cpc"] || 0;
+    let scp = Q[state + "_" + cls + "_scp"] || 0;
+    let nsdap = Q[state + "_" + cls + "_nsdap"] || 0;
+    let other = Q[state + "_" + cls + "_other"] || 0;
+
+    // National modifiers
+    let pccMod = Q[cls + "_pcc"] || 0;
+    let ccfMod = Q[cls + "_ccf"] || 0;
+    let lpcMod = Q[cls + "_lpc"] || 0;
+    let rpcMod = Q[cls + "_rpc"] || 0;
+    let cpcMod = Q[cls + "_cpc"] || 0;
+    let scpMod = Q[cls + "_scp"] || 0;
+    let nsdapMod = Q[cls + "_nsdap"] || 0;
+    let otherMod = Q[cls + "_other"] || 0;
+
+    let adjPcc = 0.2 * lpc + 0.8 * PccMod;
+    let adjCcf = 0.2 * ccf + 0.8 * ccfMod;
+    let adjLpc = 0.2 * lpc + 0.8 * LpcMod;
+    let adjCpc = 0.2 * lpc + 0.8 * CpcMod;
+    let adjRpc = 0.2 * lpc + 0.8 * RpcMod;
+    let adjScp = 0.2 * lpc + 0.8 * ScpMod;
+    let adjNsdap = 0.2 * lpc + 0.8 * NsdapMod;
+    let adjOther = 0.2 * other + 0.8 * otherMod;
+
+    let totalPct = adjPcc + adjCcf + adjLpc + adjRpc + adjCpc + adjScp + adjNsdap + adjOther + ;
+    if (totalPct === 0) continue;
+
+    pccVotes += pop * (adjPcc / totalPct);
+    ccfVotes += pop * (adjCcf / totalPct);
+    lpcVotes += pop * (adjLpc / totalPct);
+    RpcVotes += pop * (adjRpc / totalPct);
+    CpcVotes += pop * (adjCpc / totalPct);
+    ScpVotes += pop * (adjScp / totalPct);
+    NsdapVotes += pop * (adjNsdap / totalPct);
+    otherVotes += pop * (adjOther / totalPct);
+  }
 }
 
-// 1. calculate support for each of the parties
-var total_support = 0;
-for (var party of Q.parties) {
-    var party_support = 0;
-    for (var c of Q.classes) {
-        // but this version is somewhat more entertaining and allows for wilder swings in votes.
-        // the other option basically necessitates a multi-class strategy. while the first option allows for a working-class-only strategy.
-        if (Q.old_demographics) {
-            // okay i'm pretty sure this is wrong, and the hard version is correct
-            // basically this allows for "spillover" effects in other demographics.
-            // so you can campaign among say the workers and 
-            party_support += Q[c]*Q[c+'_'+party];
-            // However, there should be a cap on how much party support you can get in a certain demo.
-        } else  {
-            party_support += Q[c]*Q[c+'_'+party+'_normalized'];
-        }
-    }
-    Q[party + '_support'] = party_support;
-    total_support += party_support;
-}
-// 2. normalize support (fraction)
-// 3. Round to integers
-// TODO: round to 1 decimal instead of rounding to integers
-// to do that, we multiply party_normalized*1000 and divide the rounded number by 10.
-for (var party of Q.parties) {
-    Q[party+'_normalized'] = Q[party + '_support']/total_support;
-    Q[party+'_votes_dec'] = Math.round(Q[party+'_normalized']*1000)/10;
-    if (Q.use_decimals) {
-        Q[party+'_votes'] = Q[party+'_votes_dec'];
-        Q[party + '_votes_disp'] = Q[party+'_votes'];
-    } else {
-        Q[party+'_votes'] = Math.round(Q[party+'_normalized']*100);
-        Q[party + '_votes_disp'] = Q[party+'_votes_dec'].toFixed(1);
-    }
-    //Q[party+'_votes'] = Q[party+'_votes_dec'];
-    // display
-}
+// Allocate projected seats
+let totalVotes = pccVotes + ccfVotes + lpcVotes + rpcVotes + cpcVotes + scpVotes + nsdapVotes + otherVotes ;
+let totalSeats = Q.total_house_seats || 245;
+
+let pccShare = pccVotes / totalVotes;
+let ccfShare = ccfVotes / totalVotes;
+let lpcShare = lpcVotes / totalVotes;
+let rpcShare = rpcVotes / totalVotes;
+let cpcShare = cpcVotes / totalVotes;
+let scpShare = scpVotes / totalVotes;
+let nsdapShare = nsdapVotes / totalVotes;
+let otherShare = otherVotes / totalVotes;
+
+Q.pcc_r_pro = Math.floor(pccShare * totalSeats);
+Q.ccf_r_pro = Math.floor(ccfShare * totalSeats);
+Q.lpc_r_pro = Math.floor(lpcShare * totalSeats);
+Q.rpc_r_pro = Math.floor(rpcShare * totalSeats);
+Q.cpc_r_pro = Math.floor(cpcShare * totalSeats);
+Q.scp_r_pro = Math.floor(scpShare * totalSeats);
+Q.nsdap_r_pro = Math.floor(nsdapShare * totalSeats);
+Q.other_r_pro = Math.floor(otherShare * totalSeats);
+
+console.log(pcc_r, ccf_r, lpc_r, rpc_r, cpc_r, scp_r, nsdap_r, other_r)
+
 !}
 go-to: jumpScene
 
