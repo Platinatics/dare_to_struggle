@@ -416,7 +416,7 @@ if (d3 && window) {
 
     var lines = d3.linegraph(false, false,
             Q.parties,
-            {'ccf': '#D26E28', 'pcc': '#A00000', 'lpc': '#BE0028', 'rpc': '#961E1E', 'cpc': '#0055A5', 'scp': '#3C8C6E', 'nsdap': '#954B00', 'other': '#a0a0a0', 'sapd': '#c40000'},
+            {'ccf': '#D26E28', 'pcc': '#A00000', 'lpc': '#BE0028', 'rpc': '#E7DB73', 'cpc': '#0055A5', 'scp': '#50E23D', 'nsdap': '#954B00', 'other': '#a0a0a0', 'sapd': '#c40000'},
             {'ccf': 'CCF', 'pcc': 'PCC', 'lpc': Q.lpc_name, 'rpc': 'RPC + BVP', 'cpc': 'CPC', 'scp': 'SCP', 'nsdap': 'NSDAP', 'other': 'Others', 'sapd': 'SAPD'});
     lines.width(width).height(400);
     //var svg = lines(Q.election_records);
@@ -429,7 +429,7 @@ if (d3 && window) {
     if (!Q.historical_mode || Q.game_over) {
         var lines_2 = d3.linegraph(true, true,
             Q.parties,
-            {'ccf': '#D26E28', 'pcc': '#A00000', 'lpc': '#BE0028', 'rpc': '#961E1E', 'cpc': '#0055A5', 'scp': '#3C8C6E', 'nsdap': '#954B00', 'other': '#a0a0a0', 'sapd': '#c40000'},
+            {'ccf': '#D26E28', 'pcc': '#A00000', 'lpc': '#BE0028', 'rpc': '#E7DB73', 'cpc': '#0055A5', 'scp': '#50E23D', 'nsdap': '#954B00', 'other': '#a0a0a0', 'sapd': '#c40000'},
             {'ccf': 'CCF', 'pcc': 'PCC', 'lpc': Q.lpc_name, 'rpc': 'RPC + BVP', 'cpc': 'CPC', 'scp': 'SCP', 'nsdap': 'NSDAP', 'other': 'Others', 'sapd': 'SAPD'});
         lines_2.width(width).height(400);
         d3.select("#party_support_history").datum(Q.party_support_records).call(lines_2);
@@ -460,7 +460,7 @@ if (d3 && window) {
 
 {!<tr><td><div class="box" style='background-color:#BE0028'> </div></td><td>!} [+ lpc_name +]: {!</td><td>!} [+ lpc_r +]% {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#961E1E'> </div></td><td>!} RPC: {!</td><td>!} [+ rpc_minus_bvp_r +]% {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#E7DB73'> </div></td><td>!} RPC: {!</td><td>!} [+ rpc_minus_bvp_r +]% {!</td></tr>!}
 
 {!<tr><td><div class="box" style='background-color:#69A2BE'> </div></td><td>!} BVP: {!</td><td>!} 3% {!</td></tr>!}
 
@@ -468,7 +468,7 @@ if (d3 && window) {
 
 {!<tr><td><div class="box" style='background-color:#a0a0a0'> </div></td><td>!} Other parties: {!</td><td>!} [+ other_r +] % {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#3C8C6E'> </div></td><td>!} SCP: {!</td><td>!} [+ scp_r +]% {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#50E23D'> </div></td><td>!} SCP: {!</td><td>!} [+ scp_r +]% {!</td></tr>!}
 
 {!<tr><td><div class="box" style='background-color:#954B00'> </div></td><td>!} NSDAP: {!</td><td>!} [+ nsdap_r +]% {!</td></tr>!}
 {!</table>!}

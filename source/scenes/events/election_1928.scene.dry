@@ -166,49 +166,49 @@ on-display: {!
       {
         id: "PCC",
         seats: Math.round(Q.pcc_r),
-        color: "#E3000F",
-        outline: "#E3000F"
+        color: "#A00000",
+        outline: "#A00000"
       },
       {
         id: "CCF",
         seats: Math.round(Q.ccf_r),
-        color: "#E3000F",
-        outline: "#E3000F"
+        color: "#D26E28",
+        outline: "#D26E28"
       },
       {
         id: "LPC",
         seats: Math.round(Q.lpc_r),
-        color: "#0015BC",
-        outline: "#0015BC"
+        color: "#BE0028",
+        outline: "#BE0028"
       },
       {
         id: "RPC",
         seats: Math.round(Q.rpc_r),
-        color: "#E3000F",
-        outline: "#E3000F"
+        color: "#E7DB73",
+        outline: "#E7DB73"
       },
       {
         id: "CPC",
         seats: Math.round(Q.cpc_r),
-        color: "#E3000F",
-        outline: "#E3000F"
+        color: "#0055A5",
+        outline: "#0055A5"
       },
       {
         id: "SCP",
         seats: Math.round(Q.scp_r),
-        color: "#E3000F",
-        outline: "#E3000F"
+        color: "#50E23D",
+        outline: "#50E23D"
       },
       {
         id: "NSDAP",
         seats: Math.round(Q.nsdap_r),
-        color: "#E3000F",
-        outline: "#E3000F"
+        color: "#954B00",
+        outline: "#954B00"
       },
       {
         id: "others",
         seats: Math.round(Q.other_r),
-        color: "#00cc00",
+        color: "#a0a0a0",
         outline: "#a0a0a0"
       }
     ].filter(d => d.seats > 0);
