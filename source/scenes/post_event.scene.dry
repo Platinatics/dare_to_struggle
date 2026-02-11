@@ -15,22 +15,37 @@ for (let c of Q.classes) {
 
     // Step 2: calculate total
     let total =
+        Q[c + '_pcc'] +
         Q[c + '_lpc'] +
         Q[c + '_ccf'] +
+        Q[c + '_rpc'] +
+        Q[c + '_cpc'] +
+        Q[c + '_scp'] +
+        Q[c + '_nsdap'] +
         Q[c + '_other'];
 
     // Step 3: scale down if over 100
     if (total > 100) {
         let scale = 100 / total;
 
+        Q[c + '_pcc'] *= scale;
         Q[c + '_lpc'] *= scale;
         Q[c + '_ccf'] *= scale;
+        Q[c + '_rpc'] *= scale;
+        Q[c + '_cpc'] *= scale;
+        Q[c + '_scp'] *= scale;
+        Q[c + '_nsdap'] *= scale;
         Q[c + '_other'] *= scale;
     }
 
     // Optional: round to whole numbers
+    Q[c + '_pcc'] = Math.round(Q[c + '_pcc']);
     Q[c + '_lpc'] = Math.round(Q[c + '_lpc']);
     Q[c + '_ccf'] = Math.round(Q[c + '_ccf']);
+    Q[c + '_rpc'] = Math.round(Q[c + '_rpc']);
+    Q[c + '_cpc'] = Math.round(Q[c + '_cpc']);
+    Q[c + '_scp'] = Math.round(Q[c + '_scp']);
+    Q[c + '_nsdap'] = Math.round(Q[c + '_nsdap']);
     Q[c + '_other'] = Math.round(Q[c + '_other']);
 }
 
