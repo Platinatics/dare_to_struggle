@@ -28,7 +28,7 @@ d3.linegraph = function(noTicks, noDots, parties, partyColors, partyNames, dataM
         additionalMonths = 10;
     }
 
-    // Declare the chart dimensions and margins.
+     // Declare the chart dimensions and margins.
     var width = 500;
     var height = 400;
     var marginTop = 20;
@@ -59,9 +59,9 @@ d3.linegraph = function(noTicks, noDots, parties, partyColors, partyNames, dataM
 
       // Declare the y (vertical position) scale.
       if (!dataMax) {
-          const maxCCF = d3.max(data, d => d.ccf);
+          const maxSPD = d3.max(data, d => d.spd);
           const maxNSDAP = d3.max(data, d => d.nsdap);
-          dataMax = maxCCF >= maxNSDAP ? maxCCF + 10 : maxNSDAP + 10;
+          dataMax = maxSPD >= maxNSDAP ? maxSPD + 10 : maxNSDAP + 10;
           dataMin = 0;
       }
       const yScale = d3.scaleLinear([dataMin, dataMax], [height - marginBottom, marginTop]);
