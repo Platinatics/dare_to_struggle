@@ -1,0 +1,114 @@
+title: Intro
+new-page: true
+audio: shuffle music/1928_1933/Awit_ng_Proletaryo.mp3 music/1928_1933/Tigreng_Papel.mp3 music/1928_1933/Papuri_sa_Sosyalismo.mp3 music/1928_1933/Pagbabalikwas.mp3 music/1928_1933/Manggagawang_Pangkultura.mp3 music/1928_1933/Linyang_Pangmasa.mp3 music/1928_1933/Imperyalismo_Ibagsak.mp3 music/1928_1933/Awit_ng_Pag-asa.mp3
+go-to: intro_menu
+face-image: img/intro.png
+
+= Rectify Errors, Rebuild the Party
+
+@intro_menu
+
+- @mlm
+- @summing_experience
+- @start_nothing
+- @cpp_founded
+- @front_buildup
+- @conclusion
+
+
+@mlm
+title: Chapter I
+view-if: mlm_seen < 1 and pkp_experience_seen = 0
+go-to: intro_menu
+max-visits: 1
+on-arrival: mlm_seen = 1
+
+= Mao Tsetung Thought is our guide to self-criticism and party rebuilding
+
+Mao Tsetung Thought is the highest development of Marxism-Leninism in the present world era of the impending collapse of imperialism and the world triumph of socialism. A genuine proletarian revolutionary party must, in the present era, constantly strive for the integration of Mao Tsetung Thought and revolutionary practice in order to achieve thoroughgoing victory.
+
+Mao Tsetung Thought is the supreme guide in analyzing and summing up the experience of the Communist Party of the Philippines. Our Party has been committed from the very beginning to Marxist-Leninist theory and its creative application to the concrete conditions in the Philippines in fighting US imperialism, feudalism and bureaucrat capitalism. Availing itself of the constant advance of the theory and practice of the international communist movement, our Party is consequently committed to the theory and practice of Mao Tsetung Thought which is now the highest development of Marxism-Leninism.
+
+We are at the stage of world history and of the international communist movement when all parties and cadres of Marxist-Leninist standpoint are re-examining their experience in accordance with Mao Tsetung Thought. Communist parties like the Communist Party of the Philippines, which so far have not established proletarian revolutionary power, are confronted with the question of pursuing Mao Tsetung Thought or otherwise. This urgent question is sharpened by the emergence and worldwide campaign of modern revisionism.
+
+@summing_experience
+title: Chapter II
+view-if: mlm_seen = 1
+go-to: intro_menu
+max-visits: 1
+on-arrival: pkp_experience_seen = 1
+
+= Summing up our experience and drawing revolutionary lessons
+
+It is our urgent task to analyze and sum up our experience as a Party. The sole reason for this analysis and summing up is to draw revolutionary lessons, to identify errors and weaknesses, in order to enable us to rectify them, strengthen ourselves and rebuild a proletarian revolutionary party that is guided by Mao Tsetung Thought.
+
+When we criticize errors and weaknesses, it is "to learn from past mistakes to avoid future ones" and "to cure sickness to save the patient". In the scientific spirit of Marxism-Leninism, we make our criticism in order to rebuild the Party on stronger foundations and build up revolutionary power. As the nucleus of proletarian dictatorship, the Communist Party of the Philippines must consolidate itself through the process of rectification.
+
+Our Party has existed for the last 38 years and yet it has not won revolutionary power. The failures it has incurred should be clearly analyzed in accordance with Mao Tsetung Thought so as to enable the proletarian revolutionaries of today to act correctly.
+
+Only the broad outlines of Party history can be herein presented with the end in view of showing its dialectical development. This summing-up cannot possibly incorporate all the details that may be available. It is for further discussions among Party cadres to do this. However, our trusted comrades, old and new, have already engaged during the last three years in thorough discussions concerning the problems of the Party.
+
+@cpp_founded
+title: The Communist Party is reborn.
+view-if: pkp_experience_seen = 1
+go-to: intro_menu
+max-visits: 1
+on-arrival: cpp_refounded_seen = 1; cpp_formed = 1
+
+On December 26th, 1968, in the peaceful town of Dulaclac, Pangasinan, a certain Amado Guerrero spearheaded a new vanguard party of proletarians and peasants alike; away from the shackles of the Lava family's apparent dynastic incompetence and revisionism, as its recently expelled and other new Party members call them; to Guerrero, a reestablishment is necessity, following irreconcilable differences within the leadership and its members under the *Partido Komunista ng Pilipinas*.
+
+And so, the Communist Party of the Philippines is founded. Its founding document, *Rectify the Errors, Reubild the Party*, emphasizes Marxism-Leninism-Mao Zedong Thought as the higher stage of Marxism and Marxism-Leninism, a commitment to an armed struggle, and repudiation of so-called revisionist and counter-revolutionary thoughts.
+
+**The current goal of the Communist Party of the Philippines is to complete the unfinished bourgeois revolution of the Katipuneros, who have once struggled for self-determination between the years 1892 and 1913; then slowly, marching to the ever-growing socialist revolution.**
+
+@start_nothing
+title: But the CPP is starting from *nothing.*
+view-if: cpp_refounded_seen = 1
+go-to: intro_menu
+max-visits: 1
+on-arrival: start_nothing_seen = 1
+
+Even our cadres know this. Ever since the expulsion of *Kabataang Makabayan* and its sympathetic members from the ranks of the PKP, they are on their own. No front organizations, no armed wing, *nothing* at all, except for the ever-so dominant youth wing KM. Our resources are extremely limited, and we can't focus on both two fronts as of right now.
+
+@front_buildup
+title: Building Up the Front
+view-if: start_nothing_seen = 1
+max-visits: 1
+on-arrival: build_up_seen = 1
+
+The question of our founding congress: where do we focus in our first few years of organizing?
+
+With the foundation of the new CPP, there are two options we can do in the meantime - the formation of a united front organization or forming an armed wing or immediately wage a People's War. Since we are automatically banned by the Anti-Subversion Law of 1957 and the fact that our central committee and party members are dominated by Maoists, they suggest to form an armed wing in the New People's Army, which would kickstart a people's war against the current government. Prioritizing the formation of a united front organization, on the other hand, can broaden our base currently comprised of radicalized students into workers and peasants.
+
+Regardless of what we choose, however, both options will be implemented, with the other being shoved for later.
+
+- @ppw: To the countryside!
+- @ndf: Intensify our political campaign!
+
+@ppw
+go-to: intro_menu
+on-arrival: resources -= 2; para_resources += 2
+subtitle: This will redirect all political resources in organizing an armed wing.
+
+The Founding Congress concludes that the Communist Party must spend the first few years in organizing a proper, disciplined armed wing.
+
+However, it won't be an easy ride. Our cadres are not suited for people's war. For this, we will find disillusiomed HMB members and commanders who distrust the PKP leadership. It will take a while.
+
+@ndf
+go-to: intro_menu
+on-arrival: defensist_strength += m_support_change; internationalist_dissent += 8
+subtitle: This will redirect all political resources in organizing a political united front.
+
+The Founding Congress concludes that the Communist Party must spend the first few years in organizing a political united front.
+
+Some of our cadres are skeptical of forming a political front this early; however, they are reassured that this will ensure that the People's War will start on a relatively strong footing.
+
+@conclusion
+title: The Founding Congress concludes...
+go-to: root
+on-arrival: month_actions += 1
+view-if: build_up_seen = 1
+
+@main
+new-page: true
+go-to: main if difficulty >= 0; main.main_easy if difficulty < 0
