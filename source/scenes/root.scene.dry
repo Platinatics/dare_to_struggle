@@ -11,7 +11,7 @@ go-to: start_menu_2
 @start_menu_2
 
 - @start: Start game
-- @election_simulation: Election simulation
+// - @election_simulation: Election simulation
 - @credits: Credits
 - @game_over.achievements
 
@@ -20,9 +20,9 @@ go-to: start_menu_2
 on-arrival: {!
 Q.started = 1;
 // time elapsed (in months)
-Q.time = 1;
-Q.year = 1928;
-Q.month = 1;
+Q.time = 12;
+Q.year = 1968;
+Q.month = 12;
 // how many actions have been taken this month?
 Q.month_actions = 0;
 
@@ -194,33 +194,32 @@ Q.capital_strike_progress = 0;
 
 Q.budget = 4;
 
-// Proportion of different social groups
-// source: https://surface.syr.edu/cgi/viewcontent.cgi?filename=3&article=1016&context=books&type=additional page 45, table 3.4 - using 1925 figures
-Q.workers = 48; // industry and trade
-Q.old_middle = 13; // "old mittelstand"
-// 16.4 trade & commerce, 6.6 public and private services, 4.4 domestic help
-Q.new_middle = 14; // "new mittelstand"
-Q.rural = 25; // agriculture and forestry employment... but many of those are proletarians so...
-// source: https://surface.syr.edu/cgi/viewcontent.cgi?filename=3&article=1016&context=books&type=additional page 43, table 3.3
-Q.unemployed = 8.6;
-Q.catholics = 30;
-
-// unemployment: 1929 - 13.3, 1930 - 22.7, 1931 - 34.3, 1932 - 43.8 (same source as above)
+// Proportion of different social groups (estimated)
+// source: https://researchrepository.ilo.org/esploro/fulltext/journalArticle/Manpower-and-economic-planning-in-the/995274772502676?repId%3D12115162740002676%26mId%3D13115310460002676%26institution%3D41ILO_INST%23 - using 1967 figures
+Q.workers = 19; // industry and manufacturing
+Q.old_middle = 5; // landlords, bourgeoisie...
+Q.new_middle = 27; // government, service workers, transportation
+Q.rural = 49; // agriculture and forestry employment...
+Q.unemployed = 7.8;
+// ethnic/religious distribution (max: 30%)
+Q.catholics = 25;
+Q.aglipayans = 5.5; // philippine independent church
+Q.muslims = 5.5; // includes moro people
 
 // income for industrial workers in reichsmarks/year - 1928 = 1600 Reichsmarks/year; 1931 = 1440 Reichsmarks/year; 1933 = 1138 Reichsmarks/year - source: https://babel.hathitrust.org/cgi/pt?id=uiug.30112104147985&seq=50
 Q.income = 1600;
 // what about incomes for different classes? rural workers? middle-class workers?
 
-// inflation (in %; 1928: 2.9; 1929: 0; 1930: -5%; 1931: -10%; 1932: -10%) - source: https://en.wikipedia.org/wiki/File:BSPDRWeltkriseEngl.PNG, derived from https://www.destatis.de/DE/Methoden/WISTA-Wirtschaft-und-Statistik/2009/03/rezession-betrachtung-032009.pdf?__blob=publicationFile
-Q.inflation = 2.9;
+// inflation (in %)
+Q.inflation = 2.4;
 
-// economic growth - same source as above, Table 2 (preisbereinigt) - this is also the source for the yearly changes in the great depression.
-Q.economic_growth = 4.4;
+// economic growth
+Q.economic_growth = 5;
 
 // economic expansion timer
 Q.economic_expansion = 0;
 
-// quality of life (as % of 1928 - currently unused - should be welfare-adjusted.)
+// quality of life (as % of 1968 - currently unused - should be welfare-adjusted.)
 Q.workers_qol = 100;
 Q.rural_qol = 100;
 Q.unemployed_qol = 100;
@@ -329,18 +328,21 @@ Q.party_support_records = [];
 // inflation and unemployment records
 Q.economic_records = [];
 
-
 // State of the government
-Q.president = "Hindenburg";
-// starting chancellor: Wilhelm Marx
-Q.chancellor = "Marx";
-Q.chancellor_party = 'Z';
-Q.spd_in_government = 0;
-Q.z_in_government = 1;
-Q.ddp_in_government = 0;
-Q.dvp_in_government = 1;
-Q.dnvp_in_government = 1;
-Q.kpd_in_government = 0;
+Q.president = "Marcos";
+Q.president_ideology = "NP";
+// starting speaker: Jose Laurel Jr.
+Q.chancellor = "Jose Laurel Jr.";
+Q.chancellor_party = 'NP';
+Q.cpp_in_government = 0;
+Q.cpp_in_government_time = 0;
+Q.cpp_in_government_total_time = 0;
+Q.cpp_in_foreign_time = 0;
+Q.ppp_in_government = 1;
+Q.lp_in_government = 0;
+Q.ncp_in_government = 1;
+Q.np_in_government = 1;
+Q.pkp_in_government = 0;
 Q.nsdap_in_government = 0;
 
 Q.in_right_coalition = 0;
@@ -376,21 +378,21 @@ Q.minority_government = 0;
 // starting with the 4th Marx cabinet https://en.wikipedia.org/wiki/Fourth_Marx_cabinet
 // is the agricultural ministry useful at all?
 Q.foreign_minister = 'Streseman';
-Q.foreign_minister_party = 'DVP';
+Q.foreign_minister_party = 'NP';
 Q.interior_minister = 'von Keudell';
-Q.interior_minister_party = 'DNVP';
+Q.interior_minister_party = 'NP';
 Q.justice_minister = 'Hergt';
-Q.justice_minister_party = 'DNVP';
+Q.justice_minister_party = 'NP';
 Q.labor_minister = 'Brauns';
-Q.labor_minister_party = 'Z';
+Q.labor_minister_party = 'NP';
 Q.reichswehr_minister = 'Groener';
-Q.reichswehr_minister_party = 'I';
+Q.reichswehr_minister_party = 'NP';
 Q.economic_minister = 'Curtius';
-Q.economic_minister_party = 'DVP';
+Q.economic_minister_party = 'NP';
 Q.finance_minister = 'Köhler';
-Q.finance_minister_party = 'Z';
+Q.finance_minister_party = 'NP';
 Q.agriculture_minister = 'Schiele';
-Q.agriculture_minister_party = 'DNVP';
+Q.agriculture_minister_party = 'NP';
 
 // Events: what has occurred?
 Q.panzerkreuzer_seen = 0;
@@ -504,9 +506,9 @@ Q.n_elections = 0;
 Q.no_majority_elections = 0;
 // elections are not on a timer, but rather there is an indicator for whether you're in an electoral cycle.
 Q.in_election = 1;
-Q.next_election_year = 1928;
-Q.next_election_month = 5;
-Q.next_election_time = 5;
+Q.next_election_year = 1969;
+Q.next_election_month = 11;
+Q.next_election_time = 12;
 // government affairs timers
 Q.agricultural_policy_timer = 0;
 Q.domestic_enemies_timer = 0;
